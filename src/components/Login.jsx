@@ -10,24 +10,26 @@ const Login = () => {
   const handleLogin = async (e) => {
     e.preventDefault();
     setStatusMessage('Espere, iniciando sesión...');
-
+  
     try {
-      const response = await fetch('/login-backend', {
+      const response = await fetch('http://localhost:8000/login', { // URL corregida
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, password }),
       });
-
+  
       const data = await response.json();
       if (response.ok) {
+        setStatusMessage('Inicio de sesión exitoso');
         navigate('/filters');
       } else {
-        setStatusMessage(`Error: ${data.message}`);
+        setStatusMessage(`Error: ${data.detail || 'Credenciales incorrectas'}`);
       }
     } catch (error) {
       setStatusMessage('Error al conectar con el servidor.');
     }
   };
+  
 
   return (
     <div className="container">

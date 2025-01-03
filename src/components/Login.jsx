@@ -7,23 +7,21 @@ const Login = () => {
   const [statusMessage, setStatusMessage] = useState('');
   const navigate = useNavigate();
 
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault(); // Evitar recarga de página
     console.log("Formulario enviado"); // Mensaje para confirmar ejecución
-  };
-  
-  
+
     setStatusMessage("Espere, iniciando sesión...");
-  
+
     try {
       const response = await fetch("http://localhost:8000/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password }),
       });
-  
+
       const data = await response.json();
-  
+
       if (response.ok) {
         setStatusMessage("Inicio de sesión exitoso");
         navigate("/filters");
@@ -32,9 +30,9 @@ const Login = () => {
       }
     } catch (error) {
       setStatusMessage("Error al conectar con el servidor.");
+      console.error("Error:", error);
     }
   };
-  
 
   return (
     <div className="container">

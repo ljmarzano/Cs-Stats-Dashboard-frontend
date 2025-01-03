@@ -7,9 +7,11 @@ const Login = () => {
   const [statusMessage, setStatusMessage] = useState('');
   const navigate = useNavigate();
 
-  const handleLogin = async (e) => {
-    e.preventDefault();
-    console.log("handleLogin ejecutado");
+  const handleLogin = (e) => {
+    e.preventDefault(); // Evitar recarga de página
+    console.log("Formulario enviado"); // Mensaje para confirmar ejecución
+  };
+  
   
     setStatusMessage("Espere, iniciando sesión...");
   

@@ -8,29 +8,31 @@ const Login = () => {
   const navigate = useNavigate();
 
   const handleLogin = async (e) => {
-    e.preventDefault(); // Evitar que el formulario recargue la página
-
-    setStatusMessage('Espere, iniciando sesión...');
-
+    e.preventDefault();
+    console.log("handleLogin ejecutado");
+  
+    setStatusMessage("Espere, iniciando sesión...");
+  
     try {
-      const response = await fetch('http://localhost:8000/login', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+      const response = await fetch("http://localhost:8000/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password }),
       });
-
+  
       const data = await response.json();
-
+  
       if (response.ok) {
-        setStatusMessage('Inicio de sesión exitoso');
-        navigate('/filters');
+        setStatusMessage("Inicio de sesión exitoso");
+        navigate("/filters");
       } else {
-        setStatusMessage(`Error: ${data.detail || 'Credenciales incorrectas'}`);
+        setStatusMessage(`Error: ${data.detail || "Credenciales incorrectas"}`);
       }
     } catch (error) {
-      setStatusMessage('Error al conectar con el servidor.');
+      setStatusMessage("Error al conectar con el servidor.");
     }
   };
+  
 
   return (
     <div className="container">
